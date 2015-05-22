@@ -84,10 +84,31 @@ int GetTreeDeep(BTree T)
 	return (LDeep=GetTreeDeep(T->lchild)) > (RDeep=GetTreeDeep(T->rchild)) ? (LDeep+1) : (RDeep+1);
 }
 
-void Free(BTree T)
+void FreeTree(BTree T)
 {
     ;
 }
+
+void LevelTraverse(BTree  pRoot)  
+{  
+    if(pRoot == NULL)  
+        return;  
+    queue<BTree> q;  
+    q.push(pRoot);  
+    while(!q.empty())  
+    {  
+        BTree  pNode = q.front();  
+        q.pop();  
+        print(pNode); // 访问节点  
+        if(pNode->lchild != NULL)  
+            q.push(pNode->lchild);  
+        if(pNode->rchild != NULL)  
+            q.push(pNode->rchild);  
+    }  
+    return;  
+}  
+
+
 int main(void)
 {
     BTree  Ptr;
@@ -101,8 +122,10 @@ int main(void)
 //    cout<<"\n"<<endl;
 */
      //int i = GetNodeSum(Ptr);
-     int i = GetTreeDeep(Ptr);
-     cout<<i<<endl;
+     //int i = GetTreeDeep(Ptr);
+    
+    // cout<<i<<endl;
+    LevelTraverse(Ptr);
     return 0;
 }
 
