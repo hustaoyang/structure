@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdlib.h>
+#include<queue>
 
 using namespace std;
 
@@ -78,11 +79,15 @@ int GetNodeSum(BTree T)
 
 int GetTreeDeep(BTree T)
 {
+    int LDeep, RDeep;
     if(T != NULL)
-	return (GetTreeDeep(
+	return (LDeep=GetTreeDeep(T->lchild)) > (RDeep=GetTreeDeep(T->rchild)) ? (LDeep+1) : (RDeep+1);
 }
 
-
+void Free(BTree T)
+{
+    ;
+}
 int main(void)
 {
     BTree  Ptr;
@@ -95,7 +100,8 @@ int main(void)
     PostOrder(Ptr);
 //    cout<<"\n"<<endl;
 */
-     int i = GetNodeSum(Ptr);
+     //int i = GetNodeSum(Ptr);
+     int i = GetTreeDeep(Ptr);
      cout<<i<<endl;
     return 0;
 }
