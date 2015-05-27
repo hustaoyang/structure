@@ -22,7 +22,7 @@ void InsertNode(BTree &T, int key)
     }
     else
     {
-	if(key = T->i_value)
+	if(key == T->i_value)
 	    return;
 	else if(key < T->i_value)
 	    InsertNode(T->lchild, key);
@@ -47,6 +47,13 @@ void PreOrderTree(BTree T)
     }
 }
 
+void SearchTreetoList(BTree T)
+{
+    BTree pFirstLeft, pLastLeft, pFirstRight, pLastRight;
+ 
+}
+
+
 void InOrderTree(BTree T)
 {
     if(T != NULL)
@@ -60,18 +67,18 @@ void InOrderTree(BTree T)
 
 int main(void)
 {
-     BTree Ptr;
+     BTree Ptr = NULL;
      int  A[10] = {15, 9, 7, 5, 12, 25, 17, 29, 27, 35};
      
      int i;
      for(i = 0; i< 10; i++)
 	InsertNode(Ptr, A[i]);
      
-    // PreOrderTree(Ptr);
+     PreOrderTree(Ptr);
 
-     cout<<"\n"<<endl;
+     //cout<<"\n"<<endl;
 
-     InOrderTree(Ptr);
+     //InOrderTree(Ptr);
 
      return 0;
 }
