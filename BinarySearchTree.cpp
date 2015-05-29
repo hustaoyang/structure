@@ -113,7 +113,7 @@ bool StructureCmp(BTree T1, BTree T2)
     return (leftbool && rightbool);
 }
 
-
+//递归进行
 bool AVLTree(BTree T)
 {
     if(T == NULL)
