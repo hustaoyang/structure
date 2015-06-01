@@ -131,7 +131,68 @@ bool AVLTree(BTree T)
 	return false;
 }
 
+bool FindNode(BTree root, int key)
+{
+     if(root == NULL)
+	return false;
+ 
+     if(root->i_value == key)
+	return true;
 
+     bool found = FindNode(root->lchild, key);
+     if(!found)
+	found = FindNode(root->rchild, key);
+     return found;
+}
+
+BTree GetLastCommonParent(BTree root, int key1, int key2)
+{
+     if(root == NULL || !(FindNode(root,key1)) || !(FindNode(root, key2)))
+	return NULL;
+     if(root->i_value == key1 || root->i_value == key2)
+	return root;
+     if(FindNode(root->lchild, key1))
+     {
+	if(FindNode(root->rchild, key2))
+	   return root;
+	else 
+	   return GetLastCommonParent(root->lchild, key1, key2);
+     }
+     else
+     {
+  	if(FindNode(root->lchild, key2))
+	   return root;
+	else
+	   return GetLastCommonParent(root->rchild, key1, key2);
+     }     
+}
+
+int GetLeftLen(BTree T)
+{
+     if(T == NULL)
+	return 0;
+     else return (GetLen(T->lchild) + 1);
+}
+
+int GetRightLen(BTree T)
+{
+    if(T == NULL)
+	return 0;
+    else
+   	return (GetLen(T->rchild) + 1);
+
+}
+
+int GetMaxDistance(BTree T)
+{
+    if(T == NULL)
+	return 0;
+    int leftMaxDistance;
+    int rightMaxDistance;
+    int leftLen = GetMaxDistance(T->lchild);
+    int righLen = GetMaxDistance(T->rchild);
+    if(leftMax >
+}
 
 int main(void)
 {
@@ -163,12 +224,19 @@ int main(void)
 	cout<<"The structure of Ptr1 and Ptr2 are the same"<<endl;
      else
 	cout<<"The structure of Ptr1 and Ptr2 aren't the same"<<endl;
-     */
-
+     
+      //
       if(AVLTree(Ptr1))
 	cout<<"yes"<<endl;
       else
 	cout<<"no"<<endl;  
-     
+     */
+
+      //BTree pNode = GetLastCommonParent(Ptr1, 5, 35);
+      //cout<<pNode->i_value<<endl;
+      //BTree pNode1 = GetLastCommonParent(Ptr1, 15, 17);
+      //cout<<pNode1->i_value<<endl;
+      //BTree pNode2 = GetLastCommonParent(Ptr1, 27, 35);
+      //cout<<pNode2->i_value<<endl; 
      return 0;
 }
