@@ -49,7 +49,7 @@ void PreOrderTree(BTree T)
 
 void SearchTreetoList(BTree T)
 {
-    BTree pFirstLeft, pLastLeft, pFirstRight, pLastRight;
+    //BTree pFirstLeft, pLastLeft, pFirstRight, pLastRight;
  
 }
 
