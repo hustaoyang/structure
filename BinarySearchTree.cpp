@@ -91,6 +91,15 @@ int GetNodeNumLeaf(BTree T)
     return (leftSum + rightSum);
 }
 
+int GetTreeLevel(BTree T)
+{
+    if(T == NULL)
+	return 0;
+    int leftLevel = GetTreeLevel(T->lchild);
+    int rightLevel = GetTreeLevel(T->rchild);
+    return leftLevel > rightLevel ? (leftLevel+1):(rightLevel+1);
+}
+
 bool StructureCmp(BTree T1, BTree T2)
 {
     if(T1 == NULL && T2 == NULL)
@@ -104,12 +113,16 @@ bool StructureCmp(BTree T1, BTree T2)
     return (leftbool && rightbool);
 }
 
+//递归进行
 bool AVLTree(BTree T)
 {
     if(T == NULL)
 	return true;
-    int leftLevel = AVLTree(T->lchild) + 1;
-    int rightLevel = AVLTree(T->rchild) + 1;
+    bool leftAVL = AVLTree(T->lchild);
+    bool rightAVL= AVLTree(T->rchild);
+    
+    int leftLevel = GetTreeLevel(T->lchild);
+    int rightLevel = GetTreeLevel(T->rchild);
     int k = (leftLevel - rightLevel) >= 0 ? (leftLevel - rightLevel) : (rightLevel - leftLevel);
 
     if ( k <= 1 && k >= 0)
@@ -117,6 +130,8 @@ bool AVLTree(BTree T)
     else 
 	return false;
 }
+
+
 
 int main(void)
 {
@@ -130,7 +145,7 @@ int main(void)
      int i;
      for(i = 0; i< 10; i++)
      {
-      	//InsertNode(Ptr1, A[i]);
+      	InsertNode(Ptr1, A[i]);
 	//InsertNode(Ptr2, B[i]);
         InsertNode(Ptr, i+1);
      }
@@ -150,9 +165,10 @@ int main(void)
 	cout<<"The structure of Ptr1 and Ptr2 aren't the same"<<endl;
      */
 
-      if(AVLTree(Ptr))
+      if(AVLTree(Ptr1))
 	cout<<"yes"<<endl;
       else
 	cout<<"no"<<endl;  
+     
      return 0;
 }
