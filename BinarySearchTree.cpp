@@ -228,7 +228,6 @@ int GetMaxDistance(BTree T)
     int leftLen = GetMaxDistance(T->lchild);
     int righLen = GetMaxDistance(T->rchild);
     if(leftMax >
->>>>>>> origin/master
 }
 
 int GetRightLen(BTree T)
