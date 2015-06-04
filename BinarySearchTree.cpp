@@ -182,7 +182,7 @@ int GetRightLen(BTree T)
    	return (GetLen(T->rchild) + 1);
 
 }
-
+/*
 int GetMaxDistance(BTree T)
 {
     if(T == NULL)
@@ -193,7 +193,7 @@ int GetMaxDistance(BTree T)
     int righLen = GetMaxDistance(T->rchild);
     if(leftMax >
 }
-
+*/
 int main(void)
 {
      BTree Ptr1 = NULL;
