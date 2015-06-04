@@ -138,7 +138,6 @@ bool FindNode(BTree root, int key)
  
      if(root->i_value == key)
 	return true;
-<<<<<<< HEAD
 
      bool found = FindNode(root->lchild, key);
      if(!found)
@@ -173,7 +172,6 @@ int GetLeftLen(BTree T)
      if(T == NULL)
 	return 0;
      else return (GetLen(T->lchild) + 1);
-=======
 
      bool found = FindNode(root->lchild, key);
      if(!found)
