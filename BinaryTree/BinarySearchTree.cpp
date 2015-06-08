@@ -214,7 +214,6 @@ int GetLeftLen(BTree T)
      if(T == NULL)
 	return 0;
      else return (GetLen(T->lchild) + 1);
->>>>>>> 0d60496f5bd282c129bf2dd9740a5f0b87660915:BinaryTree/BinarySearchTree.cpp
 }
 
 int GetRightLen(BTree T)
