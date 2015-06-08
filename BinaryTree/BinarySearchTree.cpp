@@ -180,6 +180,41 @@ int GetLeftLen(BTree T)
 	return 0;
      else 
 	return (GetLen(T->lchild) + 1);
+
+     bool found = FindNode(root->lchild, key);
+     if(!found)
+	found = FindNode(root->rchild, key);
+     return found;
+}
+
+BTree GetLastCommonParent(BTree root, int key1, int key2)
+{
+     if(root == NULL || !(FindNode(root,key1)) || !(FindNode(root, key2)))
+	return NULL;
+     if(root->i_value == key1 || root->i_value == key2)
+	return root;
+     if(FindNode(root->lchild, key1))
+     {
+	if(FindNode(root->rchild, key2))
+	   return root;
+	else 
+	   return GetLastCommonParent(root->lchild, key1, key2);
+     }
+     else
+     {
+  	if(FindNode(root->lchild, key2))
+	   return root;
+	else
+	   return GetLastCommonParent(root->rchild, key1, key2);
+     }     
+}
+
+int GetLeftLen(BTree T)
+{
+     if(T == NULL)
+	return 0;
+     else return (GetLen(T->lchild) + 1);
+>>>>>>> 0d60496f5bd282c129bf2dd9740a5f0b87660915:BinaryTree/BinarySearchTree.cpp
 }
 
 int GetRightLen(BTree T)
@@ -283,6 +318,26 @@ bool IsCompleteBinaryTree(BTree  pRoot)
     }  
 }  
 
+int GetRightLen(BTree T)
+{
+    if(T == NULL)
+	return 0;
+    else
+   	return (GetLen(T->rchild) + 1);
+
+}
+/*
+int GetMaxDistance(BTree T)
+{
+    if(T == NULL)
+	return 0;
+    int leftMaxDistance;
+    int rightMaxDistance;
+    int leftLen = GetMaxDistance(T->lchild);
+    int righLen = GetMaxDistance(T->rchild);
+    if(leftMax >
+}
+*/
 int main(void)
 {
      BTree Ptr1 = NULL;

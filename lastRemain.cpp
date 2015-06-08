@@ -19,7 +19,7 @@ void lastRemain(int *array, int len, int m)
         }
         
         if(n == (len-1))
-	   return;
+	   break;
      }
 
 }
@@ -29,7 +29,7 @@ int main(void)
     for(int i = 0; i < N; ++i)
 	A[i] = i;
   
-    lastRemain(A, N, 5);
+    lastRemain(A, N, 7);
     
     for(int i =0; i < N; ++i)
 	if(A[i] != 0)
