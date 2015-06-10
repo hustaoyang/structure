@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stdio.h>
+#include<queue>
 #include<stdlib.h>
 using namespace std;
 
@@ -167,11 +168,18 @@ BTree GetLastCommonParent(BTree root, int key1, int key2)
      }     
 }
 
+int GetLen(BTree T)
+{
+    int lenth = 0;
+    while(T != NULL)
+	lenth += 1;
+}
 int GetLeftLen(BTree T)
 {
      if(T == NULL)
 	return 0;
-     else return (GetLen(T->lchild) + 1);
+     else 
+	return (GetLen(T->lchild) + 1);
 
      bool found = FindNode(root->lchild, key);
      if(!found)
@@ -219,14 +227,95 @@ int GetRightLen(BTree T)
 
 int GetMaxDistance(BTree T)
 {
-    if(T == NULL)
-	return 0;
-    int leftMaxDistance;
-    int rightMaxDistance;
-    int leftLen = GetMaxDistance(T->lchild);
-    int righLen = GetMaxDistance(T->rchild);
-    if(leftMax >
+    int MaxDistance;
+    
 }
+/*
+int GetMaxDistance(BTree T, int &leftMax, int &rightMax)
+{
+    
+    if(T == NULL)
+    {
+        leftMax = 0;
+	rightMax = 0;
+	return 0;
+    }
+    else
+    {
+        int leftLen, rightLen;
+	int leftMaxIn, rightMaxIn;
+        if(T->lchild != NULL)
+	{
+	    leftLen = GetMaxDistance(T->lchild, leftMax, rightMax) + 1;
+	    leftMaxIn = (leftLen > leftMaxIn ? leftLen : leftMaxIn);
+	    
+	}
+        else
+	{
+	    leftLen = 0;
+	    leftMaxIn = 0;
+	    
+	}
+
+        if(T->rchild != NULL)
+	{
+	    rightLen = GetMaxDistance(T->rchild, leftMax, rightMax) + 1;
+	    rightMaxIn = (rightLen > rightMaxIn ? rightLen : rightMaxIn);
+	}
+   	else
+	{
+	    rightLen = 0;
+	    rightMaxIn = 0;
+        }	
+    }
+}
+*/
+
+bool IsCompleteBinaryTree(BTree  pRoot)  
+{  
+    if(pRoot == NULL)  
+        return true;  
+    queue<BTree> q;  
+    q.push(pRoot);  
+    while(!q.empty())  
+    {  
+        BTree  pNode = q.front();  
+        q.pop();  
+
+        if(pNode->lchild != NULL && pNode->rchild == NULL)
+	{    
+	    q.push(pNode->lchild);
+	    while(!q.empty())
+	    {	
+		pNode = q.front();
+		q.pop();
+		if(pNode->lchild != NULL || pNode->rchild != NULL)
+		    return false;	
+	    }
+	    
+	    return true;
+	}
+	else if(pNode->lchild == NULL && pNode->rchild == NULL)
+	{
+	    while(!q.empty())
+	    {
+		pNode = q.front();
+		q.pop();
+               	if(pNode->lchild != NULL || pNode->rchild != NULL)
+            	    return false;	
+	    }    
+	    
+            return true;
+	}
+	else if(pNode->lchild == NULL && pNode->rchild != NULL)
+	    return false;
+	else
+	{
+	    q.push(pNode->lchild);
+	    q.push(pNode->rchild);
+	}
+    }  
+}  
 
 int GetRightLen(BTree T)
 {
@@ -253,7 +342,7 @@ int main(void)
      BTree Ptr1 = NULL;
      int  A[10] = {15, 9, 7, 5, 12, 25, 17, 29, 27, 35};
      int  B[10] = {15, 9, 7, 5, 12, 25, 17, 29, 20, 35};
-      
+     int  C[5] = {15, 10, 17, 5 ,14}; 
      BTree Ptr2 = NULL;
      BTree Ptr = NULL;
 
@@ -265,6 +354,8 @@ int main(void)
         InsertNode(Ptr, i+1);
      }
      
+     for(i = 0; i < 5; i++)
+	InsertNode(Ptr2, C[i]);
      //PreOrderTree(Ptr);
 
      //cout<<"\n"<<endl;
@@ -291,6 +382,10 @@ int main(void)
       //BTree pNode1 = GetLastCommonParent(Ptr1, 15, 17);
       //cout<<pNode1->i_value<<endl;
       //BTree pNode2 = GetLastCommonParent(Ptr1, 27, 35);
-      //cout<<pNode2->i_value<<endl; 
+      //cout<<pNode2->i_value<<endl;
+      if(IsCompleteBinaryTree(Ptr2))
+	cout<<"Yes. The tree is complete binary!"<<endl;
+      else
+	cout<<"No. The tree is not complete binary!"<<endl; 
      return 0;
 }
