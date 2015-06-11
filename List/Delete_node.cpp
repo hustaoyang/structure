@@ -26,6 +26,22 @@ void CreateList(ListNode ** p, int key)
     return ;
 }
 
+ListNode* Find_node(ListNode* pRoot, int key)
+{
+    if(pRoot == NULL)
+	return NULL;
+
+    while(pRoot != NULL)
+    {
+	if(pRoot->m_nKey == key)
+	    return pRoot;
+         
+         pRoot = pRoot->m_pNext;
+    }
+     
+    return NULL;
+}
+
 void Print(ListNode* pRoot)
 {
      if(pRoot == NULL)
@@ -40,51 +56,35 @@ void Print(ListNode* pRoot)
 
 }
 
-
-ListNode* find_n_node(ListNode* pHead, int n)
+void Delete_node(ListNode* pRoot, ListNode* deletenode)
 {
-     if(pHead == NULL)
-	return NULL;
-     ListNode* find_node = pHead;
-     ListNode* move_node = pHead;
+     if(pRoot == NULL || deletenode == NULL)
+	return ;
+     
+     if(deletenode->m_pNext != NULL)
+     {
+	 deletenode->m_nKey = deletenode->m_pNext->m_nKey;
+         ListNode* q = deletenode->m_pNext;
+         deletenode->m_pNext = deletenode->m_pNext->m_pNext;
+         free(q);
+     }
+     else
+     {
+	while(pRoot != NULL)
+	{
+	    if(pRoot->m_pNext == deletenode)
+	    {
+		pRoot->m_pNext = NULL;
+		free(deletenode);
+	    }
+            
+            pRoot = pRoot->m_pNext;
+	}
+     }
 
-     for(int i=0; i < n; ++i)
-     {
-         if(move_node == NULL)
-	    return NULL;
-         else
-	    move_node = move_node->m_pNext;
-     }
-     
-     while(move_node != NULL)
-     {
-	find_node = find_node->m_pNext;
-	move_node = move_node->m_pNext;
-     }
-     
-     return find_node;
+     return;
 }
 
-ListNode* find_mid_node(ListNode* pHead)
-{
-    if(pHead == NULL)
-	return NULL;
-    
-    ListNode* fast_node = pHead;
-    ListNode* low_node = pHead;
-
-    int count = 0;
-    while(fast_node->m_pNext != NULL)
-    {
-        count++;
-        fast_node = fast_node->m_pNext;
-
-        if((count%2) == 0)
- 	    low_node = low_node->m_pNext;
-    }     
-   
-    return low_node;
-}
 int main(void)
 {
     int A[] = {1, 3, 5, 7, 9, 11};
@@ -104,10 +104,12 @@ int main(void)
     //ListNode* Find = find_n_node(Rootb, 4);
     //cout<<Find->m_nKey<<endl;
  
-    ListNode* mid = find_mid_node(Rootb);
-    cout<<mid->m_nKey<<endl;
+    //ListNode* mid = find_mid_node(Rootb);
+    //cout<<mid->m_nKey<<endl;
 
-    //Print(Root1);
+    ListNode* p = Find_node(Rootb, 99);
+    Delete_node(Rootb, p);
+    Print(Rootb);
 
     return 0;
 }
