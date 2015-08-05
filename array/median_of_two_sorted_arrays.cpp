@@ -40,7 +40,7 @@ public:
             }
         }
 
-        result = (nums1[left1] + nums2[left2]) / 2;
+        result = min(nums1[left1], nums2[left2]);
        
         return result;
 
