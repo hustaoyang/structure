@@ -85,14 +85,42 @@ void Delete_node(ListNode* pRoot, ListNode* deletenode)
      return;
 }
 
+ListNode* deleteDuplication(ListNode* pHead)
+{
+	if (NULL == pHead)
+            return pHead;
+        
+        ListNode* move = pHead;
+        ListNode* remove = pHead->m_pNext;
+        while (NULL != remove)
+        {
+            if (move->m_nKey == remove->m_nKey)
+                remove = remove->m_pNext;
+            else if (move->m_pNext != remove)
+            {
+                move->m_pNext = remove;
+                move = remove;
+                remove = remove->m_pNext;
+            }
+            else
+            {
+                move = move->m_pNext;
+                remove = remove->m_pNext;
+            }
+        }
+        
+        move->m_pNext = NULL;
+        
+        return pHead;
+}
 int main(void)
 {
     int A[] = {1, 3, 5, 7, 9, 11};
-    int B[] = {3, 2, 99, 23, 9, 232};
+    int B[] = {5, 4, 4, 3, 3, 2, 1};
     ListNode * Root = NULL;
     ListNode * Rootb = NULL;
 
-    for(int i = 0; i < 6; ++i)
+    for(int i = 0; i < 7; ++i)
     {
 	//CreateList(&Root, A[i]);
 	CreateList(&Rootb, B[i]);
@@ -100,16 +128,20 @@ int main(void)
 
     Print(Rootb);
 
-    cout<<endl;
+	Root = deleteDuplication(Rootb);
+
+	Print(Rootb);
+
+    //cout<<endl;
     //ListNode* Find = find_n_node(Rootb, 4);
     //cout<<Find->m_nKey<<endl;
  
     //ListNode* mid = find_mid_node(Rootb);
     //cout<<mid->m_nKey<<endl;
 
-    ListNode* p = Find_node(Rootb, 99);
-    Delete_node(Rootb, p);
-    Print(Rootb);
+    //ListNode* p = Find_node(Rootb, 99);
+    //Delete_node(Rootb, p);
+    //Print(Rootb);
 
     return 0;
 }
