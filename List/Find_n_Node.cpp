@@ -85,6 +85,34 @@ ListNode* find_mid_node(ListNode* pHead)
    
     return low_node;
 }
+
+//find the last k node
+ListNode* find_kth_to_tail(ListNode* pListHead, unsigned int k)
+{
+    if (NULL == pListHead)
+        return NULL;
+    ListNode* low = pListHead;
+    ListNode* fast = pListHead;
+    
+    int move = k;
+    while (NULL != fast && move > 0)
+    {
+        fast = fast->m_pNext;
+        move--;
+    }
+    
+    if (move >= 1)
+        return NULL;
+
+    while (NULL != fast)
+    {
+        fast = fast->m_pNext;
+        low = low->m_pNext;
+    }
+
+    return low;
+}
+
 int main(void)
 {
     int A[] = {1, 3, 5, 7, 9, 11};
@@ -104,10 +132,16 @@ int main(void)
     //ListNode* Find = find_n_node(Rootb, 4);
     //cout<<Find->m_nKey<<endl;
  
-    ListNode* mid = find_mid_node(Rootb);
-    cout<<mid->m_nKey<<endl;
+    //ListNode* mid = find_mid_node(Rootb);
+    //cout<<mid->m_nKey<<endl;
 
     //Print(Root1);
+    int k = 0;
+    while (cin>>k)
+    {
+        ListNode* result = find_kth_to_tail(Rootb, k);
+        cout<<result->m_nKey<<endl;
+    }
 
     return 0;
 }

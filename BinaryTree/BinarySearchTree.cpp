@@ -119,17 +119,17 @@ bool AVLTree(BTree T)
 {
     if(T == NULL)
 	return true;
-    bool leftAVL = AVLTree(T->lchild);
-    bool rightAVL= AVLTree(T->rchild);
+    //bool leftAVL = AVLTree(T->lchild);
+    //bool rightAVL= AVLTree(T->rchild);
     
     int leftLevel = GetTreeLevel(T->lchild);
     int rightLevel = GetTreeLevel(T->rchild);
     int k = (leftLevel - rightLevel) >= 0 ? (leftLevel - rightLevel) : (rightLevel - leftLevel);
 
     if ( k <= 1 && k >= 0)
-	return true;
+	    return true;
     else 
-	return false;
+	    return false;
 }
 
 bool FindNode(BTree root, int key)
