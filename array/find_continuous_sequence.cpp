@@ -13,13 +13,46 @@ public:
         return result;
 
 	//vector<int> path;
-	for(int i = 1; i <= (sum + 1) / 2; ++i)
-	    do_find(result, i, sum);
+	//for(int i = 1; i <= (sum + 1) / 2; ++i)
+	    do_find(result, sum);
 
 	return result;
 	
 	}
 private:
+    void do_find(vector<vector<int> >& output, int sum)
+    {
+        int i = 1; 
+        int j = 2;
+        int count = 3;
+        if (sum < count)
+            return;
+
+        while (i < ((sum+1) / 2))
+        {
+            if (sum == count)
+            {
+                vector<int> path;
+                for (int k = i; k <= j; ++k)
+                    path.push_back(k);
+                output.push_back(path);
+                count -= i;
+                i++;
+            }
+            else if (sum > count) {
+                    ++j;
+                    count += j;
+            }
+            else
+            {
+                count -= i;
+                ++i;
+            }
+        }
+
+        return ;
+    }
+    /*
 	void do_find(vector<vector<int> >& output,int k, int sub)
 	{
         int sum = 0;
@@ -41,6 +74,7 @@ private:
         return;
 		
 	}
+    */
 };
 
 int main()

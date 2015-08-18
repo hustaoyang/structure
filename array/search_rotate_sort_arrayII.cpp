@@ -19,7 +19,7 @@ public:
 			if (nums[left] <= nums[mid])
 			{
 				if (nums[left] <= target && target < nums[mid])
-					right = mid - 1;
+					right--;
 				else 
 					left = mid + 1;
 			}
@@ -41,12 +41,12 @@ public:
 
 int main()
 {	
-	//int a[] = {4, 5, 6, 7, 0, 1, 2};
+	int a[] = {3,3, 1, 2, 2, 3,3};
 	vector<int> vec(a, a+7);
 
 	Solution S;
 	int target = 8;
-	//while (cin>>target)
+	while (cin>>target)
 		cout<<S.search(vec, target)<<endl;
 
 	return 0;
